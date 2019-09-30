@@ -1,15 +1,16 @@
 const express = require('express');
 const app = express();
 
-app.set('view engine', 'pug');
-app.set('views', 'views');
-
 app.get('/', (req, res) => {
-  const texts = [];
+  const array = [];
   for (let i = 1; i <= 50; i++) {
-    texts.push(`${i} Soy ${(i % 2 === 0 ? 'Par' : 'Impar')}!`);
+    if (i % 2 === 0) {
+      array.push(`<p>${i} Soy Par!</p>`);
+    } else {
+      array.push(`<p>${i} Soy Impar!</p>`);
+    }
   }
-  res.render('index', { texts: texts });
+  res.send(array.join('\n'));
 });
 
 app.listen(3000, () => console.log('Listening on port 3000!'));
